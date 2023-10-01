@@ -18,6 +18,24 @@ namespace ToDoList.Models
       
       MySqlConnection conn = new MySqlConnection(DBConfiguration.ConnectionString);
       conn.Open();
+
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = "SELECT * FROM items;";
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while (rdr.Read())
+      {
+        int itemId = rdr.GetInt32(0);
+        string itemDescription = rdr.GetString(1);
+        Item newItem = new Item(itemDescription, itemId);
+        allItems.Add(newItem);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return allItems;
     }
     public static void ClearAll()
     {
