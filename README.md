@@ -12,7 +12,7 @@
   }
 }
 ```
-  > Be sure to replace the {USERNAME} and {PASSWORD} fields with your own relevant information. Do not include the curly brackets.
+  > Be sure to replace the `{USERNAME}` and `{PASSWORD}` fields with your own relevant information. Do not include the curly brackets.
 5. In the production directory, you can enter the following command `dotnet watch run`.
   > This command will start the project in development mode with a watcher.
 
