@@ -4,7 +4,7 @@
 2. Open your shell (e.g., Terminal or GitBash) and navigate to this project's production directory called `ToDoList`. 
 3. Within the production directory `ToDoList`, create a new file entitled `appsettings.json`.
 4. Within `appsettings.json`, enter the following code:
-```javascript
+```json
 {
   "ConnectionStrings": {
       "DefaultConnection": "Server=localhost;Port=3306;database=to_do_list_with_mysqlconnector;uid={USERNAME};pwd={PASSWORD};",
