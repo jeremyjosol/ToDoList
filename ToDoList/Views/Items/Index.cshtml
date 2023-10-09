@@ -14,7 +14,7 @@
 } 
 
 <p>To Do</p>
-@foreach (Item item in Model.Where(i => i.IsComplete == false))
+@foreach (Item item in Model.Where(item => item.IsComplete == false))
 {
   @using (Html.BeginForm("MarkAsComplete", "Items"))
   { 
@@ -30,7 +30,7 @@
 }
 
 <p> To Don't</p>
-@foreach (Item item in Model.Where(i => i.IsComplete == true))
+@foreach (Item item in Model.Where(item => item.IsComplete == true))
 {
   @using (Html.BeginForm("MarkAsComplete", "Items"))
   { 
