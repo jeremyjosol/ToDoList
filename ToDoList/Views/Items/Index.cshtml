@@ -4,6 +4,7 @@
 
 @using ToDoList.Models;
 @model List<ToDoList.Models.Item>;
+@using System.Collections.Generic;
 
 <h1>Items</h1>
 
@@ -12,16 +13,37 @@
   <h3>No items have been added yet!</h3>
 } 
 
-@foreach (Item item in Model)
+<p>To Do</p>
+@foreach (Item item in Model.Where(i => i.IsComplete == false))
 {
   @using (Html.BeginForm("MarkAsComplete", "Items"))
-  {
+  { 
     <li>
-      @Html.CheckBox("isComplete", new { value = item.IsComplete, id = item.ItemId })
-      @Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) @item.Category.Name
-      <input type="submit" value="false"/>
+      <p> To don't</p>
+      @Html.CheckBox("isComplete", item.IsComplete)
+      @Html.Hidden("id", @item.ItemId )
+      @Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) @item.Category.Name 
+      @item.IsComplete
+      <input type="submit" value="button"/>
     </li>
   }
 }
+
+<p> To Don't</p>
+@foreach (Item item in Model.Where(i => i.IsComplete == true))
+{
+  @using (Html.BeginForm("MarkAsComplete", "Items"))
+  { 
+    <li>
+      <p> To do</p>
+      @Html.CheckBox("isComplete", item.IsComplete)
+      @Html.Hidden("id", @item.ItemId )
+      @Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) @item.Category.Name 
+      @item.IsComplete
+      <input type="submit" value="button"/>
+    </li>
+  }
+}
+
 <p>@Html.ActionLink("Add new item", "Create")</p>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>

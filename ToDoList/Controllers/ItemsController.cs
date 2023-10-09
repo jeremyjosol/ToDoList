@@ -35,6 +35,7 @@ namespace ToDoList.Controllers
         return RedirectToAction("Create");
       }
       _db.Items.Add(item);
+      item.IsComplete = false;
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
@@ -108,7 +109,7 @@ namespace ToDoList.Controllers
       if (itemComplete.IsComplete != null)
       {
         itemComplete.IsComplete = isComplete;
-        // _db.Items.Update(itemComplete);
+        _db.Items.Update(itemComplete);
         _db.SaveChanges();
       }
       return RedirectToAction("Index");
