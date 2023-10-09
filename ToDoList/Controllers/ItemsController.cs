@@ -18,7 +18,7 @@ namespace ToDoList.Controllers
     public ActionResult Index()
     {
       List<Item> model = _db.Items
-                            .Include(item => item.Category)
+                            .Include(item => item.Category) 
                             .ToList();
       return View(model);
     }
@@ -99,6 +99,18 @@ namespace ToDoList.Controllers
       ItemTag joinEntry = _db.ItemTags.FirstOrDefault(entry => entry.ItemTagId == joinId);
       _db.ItemTags.Remove(joinEntry);
       _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+    [HttpPost]
+    public ActionResult MarkAsComplete(bool isComplete, int id)
+    {
+      Item itemComplete = _db.Items.FirstOrDefault(itemChecker => itemChecker.ItemId == id);
+      if (itemComplete.IsComplete != null)
+      {
+        itemComplete.IsComplete = isComplete;
+        // _db.Items.Update(itemComplete);
+        _db.SaveChanges();
+      }
       return RedirectToAction("Index");
     }
   }

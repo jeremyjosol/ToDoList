@@ -14,8 +14,14 @@
 
 @foreach (Item item in Model)
 {
-  <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name</li>
+  @using (Html.BeginForm("MarkAsComplete", "Items"))
+  {
+    <li>
+      @Html.CheckBox("isComplete", new { value = item.IsComplete, id = item.ItemId })
+      @Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) @item.Category.Name
+      <input type="submit" value="false"/>
+    </li>
+  }
 }
 <p>@Html.ActionLink("Add new item", "Create")</p>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
-
