@@ -11,7 +11,7 @@
 
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(model => model.IsComplete, new { IsComplete = false })
+  @Html.HiddenFor(model => model.IsComplete, new { Value = false }) // ?
   @Html.LabelFor(model => model.Description)
   @Html.TextBoxFor(model => model.Description)
 

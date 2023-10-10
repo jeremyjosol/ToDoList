@@ -28,7 +28,7 @@
   }
 }
 
-<p> To Don't</p>
+<p>To Don't</p>
 @foreach (Item item in Model.Where(item => item.IsComplete == true))
 {
   @using (Html.BeginForm("MarkAsComplete", "Items"))
