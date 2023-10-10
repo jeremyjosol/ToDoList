@@ -19,7 +19,6 @@
   @using (Html.BeginForm("MarkAsComplete", "Items"))
   { 
     <li>
-      @* <p> To don't</p> *@
       @Html.CheckBox("isComplete", item.IsComplete)
       @Html.Hidden("id", @item.ItemId )
       @Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) @item.Category.Name 
@@ -35,7 +34,6 @@
   @using (Html.BeginForm("MarkAsComplete", "Items"))
   { 
     <li>
-      @* <p> To do</p> *@
       @Html.CheckBox("isComplete", item.IsComplete, new { value = "checked" })
       @Html.Hidden("id", @item.ItemId )
       @Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) @item.Category.Name 
