@@ -22,12 +22,15 @@ namespace ToDoList.Controllers
       _userManager = userManager;
       _db = db;
     }
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
-      List<Item> model = _db.Items
+      string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      List<Item> userItems = _db.Items
+                            .Where(entry => entry.User.Id == currentUser.Id)
                             .Include(item => item.Category) 
                             .ToList();
-      return View(model);
+      return View(userItems);
     }
     public ActionResult Create()
     {
@@ -35,16 +38,22 @@ namespace ToDoList.Controllers
       return View();
     }
     [HttpPost]
-    public ActionResult Create(Item item)
+    public async Task<ActionResult> Create(Item item, int CategoryId)
     {
-      if (item.CategoryId == 0)
+      if (!ModelState.IsValid)
       {
-        return RedirectToAction("Create");
+        ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+        return View(item);
       }
-      _db.Items.Add(item);
-      item.IsComplete = false;
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      else
+      {
+        string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+        item.User = currentUser;
+        _db.Items.Add(item);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
     }
     public ActionResult Details(int id)
     {
