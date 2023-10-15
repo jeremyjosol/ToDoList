@@ -13,34 +13,34 @@
   <h3>No items have been added yet!</h3>
 } 
 
-<p>To Do</p>
-@foreach (Item item in Model.Where(item => item.IsComplete == false))
-{
-  @using (Html.BeginForm("MarkAsComplete", "Items"))
-  { 
+<h2>To Do:</h2>
+@using (Html.BeginForm("MarkAsComplete", "Items"))
+{ 
+  @foreach (Item item in Model.Where(item => item.IsComplete == false))
+  {
     <li>
       @Html.CheckBox("isComplete", item.IsComplete)
       @Html.Hidden("id", @item.ItemId )
       @Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) @item.Category.Name 
-      @item.IsComplete
-      <input type="submit" value="button"/>
     </li>
   }
+  <input class="btn btn-outline-success btn-sm" type="submit" value="Complete"/>
 }
 
-<p>To Don't</p>
-@foreach (Item item in Model.Where(item => item.IsComplete == true))
-{
-  @using (Html.BeginForm("MarkAsComplete", "Items"))
-  { 
+<h2>Complete:</h2>
+@using (Html.BeginForm("MarkAsComplete", "Items"))
+{ 
+  @foreach (Item item in Model.Where(item => item.IsComplete == true))
+  {
     <li>
       @Html.CheckBox("isComplete", item.IsComplete, new { value = "checked" })
       @Html.Hidden("id", @item.ItemId )
       @Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) @item.Category.Name 
-      @item.IsComplete
-      <input type="submit" value="button"/>
+      <br />
+      <br />
     </li>
   }
+  <input class ="btn btn-outline-success btn-sm" type="submit" value="Back To Do"/>
 }
 
 <p>@Html.ActionLink("Add new item", "Create")</p>
