@@ -51,10 +51,12 @@ namespace ToDoList.Controllers
         ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
         item.User = currentUser;
         _db.Items.Add(item);
+         item.IsComplete = false;
         _db.SaveChanges();
         return RedirectToAction("Index");
       }
     }
+  
     public ActionResult Details(int id)
     {
       Item thisItem = _db.Items
