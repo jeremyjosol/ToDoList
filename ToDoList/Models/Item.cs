@@ -11,6 +11,7 @@ namespace ToDoList.Models
     public Category Category { get; set; }
     public List<ItemTag> JoinEntities { get; }
     public bool? IsComplete { get; set; }
+    public ApplicationUser User { get; set; }
 
   }
 }
