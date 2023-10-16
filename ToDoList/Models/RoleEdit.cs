@@ -1,16 +1,12 @@
-using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
  
-namespace Identity.Models
+namespace ToDoList.Models
 {
-    public class RoleModification
+    public class RoleEdit
     {
-        [Required]
-        public string RoleName { get; set; }
- 
-        public string RoleId { get; set; }
- 
-        public string[]? AddIds { get; set; }
- 
-        public string[]? DeleteIds { get; set; }
+        public IdentityRole Role { get; set; }
+        public IEnumerable<ApplicationUser> Members { get; set; }
+        public IEnumerable<ApplicationUser> NonMembers { get; set; }
     }
 }
