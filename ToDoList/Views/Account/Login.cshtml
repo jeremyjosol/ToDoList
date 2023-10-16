@@ -21,7 +21,7 @@
 
   @Html.LabelFor(m => m.Password)
   @Html.EditorFor(m => m.Password)
-
+  <p>Remember me? <input type="checkbox" asp-for="Remember" /> </p>
   <input type="submit" value="Log in" />
 }
 
